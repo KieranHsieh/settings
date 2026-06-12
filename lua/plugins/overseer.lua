@@ -5,8 +5,8 @@ vim.pack.add({
 require('overseer').setup({
     disable_template_modules = {
         'overseer.template.make',
-        '^.*cargo'
-    }
+        '^.*cargo',
+    },
 })
 
 vim.keymap.set('n', '<leader>rt', '<cmd>OverseerRun<CR>', { desc = '[R]un a [T]ask' })

@@ -123,7 +123,7 @@ do
         pattern = 'term://*',
         callback = function()
             vim.cmd('startinsert')
-        end
+        end,
     })
 end
 
@@ -173,9 +173,7 @@ end
 --
 -- ================================================================= --
 do
-    require('plugins.telescope')
     require('plugins.onedarkpro')
-    require('plugins.neo-tree')
     require('plugins.neoscroll')
     require('plugins.mason')
     require('plugins.fidget')
@@ -188,4 +186,6 @@ do
     require('plugins.nvim-notify')
     require('plugins.mini')
     require('plugins.overseer')
+    require('plugins.fzf-lua')
+    require('plugins.oil')
 end

@@ -3,9 +3,20 @@ vim.pack.add({
 })
 
 require('overseer').setup({
+    --- Disable everything but VS Code Tasks and Justfiles
     disable_template_modules = {
+        'overseer.template.cargo',
+        'overseer.template.composer',
+        'overseer.template.deno',
+        'overseer.template.devenv',
+        'overseer.template.mage',
         'overseer.template.make',
-        '^.*cargo',
+        'overseer.template.mise',
+        'overseer.template.mix',
+        'overseer.template.npm',
+        'overseer.template.rake',
+        'overseer.template.task',
+        'overseer.template.tox'
     },
 })
 

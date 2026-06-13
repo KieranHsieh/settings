@@ -13,6 +13,7 @@ require('oil').setup({
     keymaps = {
         ['<ESC><ESC>'] = { 'actions.close' },
         ['<C-c>'] = false,
+        ['<C-s>'] = false,
     },
 })
 
@@ -26,9 +27,9 @@ end
 
 vim.keymap.set('n', '<leader>se', open_cwd, { desc = '[S]earch With File [E]xplorer' })
 
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = 'oil',
-    callback = function(args)
-        vim.keymap.set('n', 'o', select_with_preview, { buffer = args.buf })
-    end,
-})
+-- vim.api.nvim_create_autocmd('FileType', {
+--     pattern = 'oil',
+--     callback = function(args)
+--         vim.keymap.set('n', 'o', select_with_preview, { buffer = args.buf })
+--     end,
+-- })

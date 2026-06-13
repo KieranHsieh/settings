@@ -33,6 +33,7 @@ fzf.register_ui_select()
 local function search_hidden_files()
     fzf.files({
         hidden = true,
+        no_ignore = true
     })
 end
 

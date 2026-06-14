@@ -14,7 +14,6 @@ require('blink.cmp').setup({
     sources = {
         default = { 'lsp', 'path', 'snippets' },
     },
-    snippets = { preset = 'luasnip' },
     fuzzy = { implementation = 'prefer_rust_with_warning' },
     signature = { enabled = true },
 })

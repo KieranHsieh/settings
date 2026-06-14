@@ -59,26 +59,6 @@ end
 
 -- ================================================================= --
 --
--- Keymap Settings
---
--- ================================================================= --
-do
-    vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Remove search highlights' })
-    vim.keymap.set('n', '<leader>qf', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-    vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left' })
-    vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right' })
-    vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the down' })
-    vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the up' })
-    vim.keymap.set('n', '<C-s>', '<cmd>w<CR>', { desc = '[S]ave the current buffer' })
-    vim.keymap.set('n', '<leader>to', '<cmd>botright 15split | terminal<CR>', { desc = '[T]erminal [O]pen' })
-
-    vim.keymap.set('i', '<C-s>', '<cmd>w<CR>', { desc = '[S]ave the current buffer' })
-
-    vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-end
-
--- ================================================================= --
---
 -- Diagnostic Settings
 --
 -- ================================================================= --
@@ -118,13 +98,13 @@ do
         end,
     })
 
-    vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter', 'TermOpen' }, {
-        group = vim.api.nvim_create_augroup('kth-terminal-autoinsert', { clear = true }),
-        pattern = 'term://*',
-        callback = function()
-            vim.cmd('startinsert')
-        end,
-    })
+    -- vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter', 'TermOpen' }, {
+    --     group = vim.api.nvim_create_augroup('kth-terminal-autoinsert', { clear = true }),
+    --     pattern = 'term://*',
+    --     callback = function()
+    --         vim.cmd('startinsert')
+    --     end,
+    -- })
 end
 
 -- ================================================================= --
@@ -169,23 +149,42 @@ end
 
 -- ================================================================= --
 --
--- Plugins
+-- Plugins (and Plugin Keymaps)
 --
 -- ================================================================= --
 do
-    require('plugins.onedarkpro')
-    require('plugins.neoscroll')
-    require('plugins.mason')
-    require('plugins.fidget')
-    require('plugins.conform')
-    require('plugins.nvim-autopairs')
-    require('plugins.luasnip')
+    require('themes.onedarkpro')
+
     require('plugins.blink')
-    require('plugins.gitsigns')
-    require('plugins.which-key')
-    require('plugins.nvim-notify')
-    require('plugins.mini')
-    require('plugins.overseer')
+    require('plugins.conform')
+    require('plugins.fidget')
     require('plugins.fzf-lua')
+    require('plugins.gitsigns')
+    require('plugins.mason')
+    require('plugins.mini')
+    require('plugins.neoscroll')
+    require('plugins.nvim-dap-ui')
+    require('plugins.nvim-notify')
     require('plugins.oil')
+    require('plugins.overseer')
+    require('plugins.which-key')
+end
+
+-- ================================================================= --
+--
+-- Keymap Settings
+--
+-- ================================================================= --
+do
+    --- Global
+    vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Remove search highlights' })
+    vim.keymap.set('n', '<leader>qf', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+    vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left' })
+    vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right' })
+    vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the down' })
+    vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the up' })
+    vim.keymap.set('n', '<C-s>', '<cmd>w<CR>', { desc = '[S]ave the current buffer' })
+    vim.keymap.set('n', '<leader>to', '<cmd>botright 15split | terminal<CR>', { desc = '[T]erminal [O]pen' })
+    vim.keymap.set('i', '<C-s>', '<cmd>w<CR>', { desc = '[S]ave the current buffer' })
+    vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 end

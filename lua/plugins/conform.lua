@@ -8,6 +8,8 @@ require('conform').setup({
     },
 })
 
-vim.keymap.set({ 'n', 'v' }, '<leader>f', function()
+local function format_file()
     require('conform').format({ async = true })
-end, { desc = '[F]ormat Current File' })
+end
+
+vim.keymap.set({ 'n', 'v' }, '<leader>f', format_file, { desc = '[F]ormat Current File' })

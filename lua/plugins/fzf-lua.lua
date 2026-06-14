@@ -11,6 +11,15 @@ require('fzf-lua').setup({
             ['ctrl-q'] = 'select-all+accept',
         },
     },
+    defaults = {
+        preview_pager = false,
+    },
+    previewers = {
+        git_diff = {
+            pager = false,
+        },
+        builtin = {},
+    },
     git = {
         status = {
             actions = {
@@ -33,7 +42,7 @@ fzf.register_ui_select()
 local function search_hidden_files()
     fzf.files({
         hidden = true,
-        no_ignore = true
+        no_ignore = true,
     })
 end
 
@@ -43,15 +52,24 @@ local function search_config_files()
     })
 end
 
+local function search_document_functions()
+    fzf.lsp_document_symbols({
+        query = 'function ',
+    })
+end
+
 vim.keymap.set('n', '<leader>sf', fzf.files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', search_hidden_files, { desc = '[S]earch [H]idden Files' })
 vim.keymap.set('n', '<leader>sn', search_config_files, { desc = '[S]earch [N]eovim Config' })
+vim.keymap.set('n', '<leader>sdt', fzf.lgrep_curbuf, { desc = '[S]earch [D]ocument [T]ext' })
 vim.keymap.set('n', '<leader>sif', fzf.live_grep_native, { desc = '[S]earch [I]n All [F]iles' })
 vim.keymap.set('n', '<leader>sgf', fzf.git_files, { desc = '[S]earch [G]it Files' })
 vim.keymap.set('n', '<leader>sgl', fzf.git_commits, { desc = '[S]earch Git [L]og' })
 vim.keymap.set('n', '<leader>sgs', fzf.git_status, { desc = '[S]earch Git [C]hanges' })
 vim.keymap.set('n', '<leader>skm', fzf.keymaps, { desc = '[S]earch [K]ey [M]appings' })
 vim.keymap.set('n', '<leader>sb', fzf.buffers, { desc = '[S]earch Open [B]uffers' })
+vim.keymap.set('n', '<leader>sw', fzf.grep_cword, { desc = '[S]earch Current [W]ord' })
+vim.keymap.set('v', '<leader>sw', fzf.grep_visual, { desc = '[S]earch Current [W]ord' })
 
 -- ================================================================= --
 --
@@ -63,20 +81,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(event)
         local buf = event.buf
 
-        vim.keymap.set('n', 'grr', fzf.lsp_references, { buffer = buf, desc = '[G]oto [R]eferences' })
-        vim.keymap.set('n', 'gri', fzf.lsp_implementations, { buffer = buf, desc = '[G]oto [I]mplementations' })
-        vim.keymap.set('n', 'grd', fzf.lsp_definitions, { buffer = buf, desc = '[G]oto [D]efinition' })
-        vim.keymap.set(
-            'n',
-            '<leader>sds',
-            fzf.lsp_document_symbols,
-            { buffer = buf, desc = '[S]earch [D]ocument [S]ymbols' }
-        )
-        vim.keymap.set(
-            'n',
-            '<leader>sws',
-            fzf.lsp_live_workspace_symbols,
-            { buffer = buf, desc = '[S]earch [W]orkspace [S]ymbols' }
-        )
+        local function add_keymap(mode, map, func, desc)
+            vim.keymap.set(mode, map, func, { buffer = buf, desc = desc })
+        end
+
+        add_keymap('n', 'grr', fzf.lsp_references, '[G]oto [R]eferences')
+        add_keymap('n', 'gri', fzf.lsp_implementations, '[G]oto [I]mplementations')
+        add_keymap('n', 'grd', fzf.lsp_definitions, '[G]oto [D]efinition')
+        add_keymap('n', '<leader>sds', fzf.lsp_document_symbols, '[S]earch [D]ocumnet [S]ymbols')
+        add_keymap('n', '<leader>sdf', search_document_functions, '[S]earch [D]ocumnet [F]unctions')
+        add_keymap('n', '<leader>sws', fzf.lsp_live_workspace_symbols, '[S]earch [W]orkspace [S]ymbols')
     end,
 })

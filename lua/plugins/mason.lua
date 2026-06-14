@@ -67,14 +67,13 @@ require('mason-tool-installer').setup({
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('kth-lsp-attach', { clear = true }),
     callback = function(event)
-        local map = function(keys, func, desc, mode)
-            mode = mode or 'n'
-            vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+        local function add_keymap(mode, map, func, desc)
+            vim.keymap.set(mode, map, func, { buffer = event.buf, desc = desc })
         end
 
-        map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
-        map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
-        map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+        add_keymap('n', 'grn', vim.lsp.buf.rename, '[R]e[n]ame Symbol')
+        add_keymap({ 'n', 'x' }, 'gra', '[G]oto Code [A]ction')
+        add_keymap('n', 'grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
         -- Highlight references of the word under your cursor after it rests there for a bit
         local client = vim.lsp.get_client_by_id(event.data.client_id)

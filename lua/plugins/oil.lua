@@ -21,15 +21,4 @@ local function open_cwd(opts)
     require('oil').open_float(vim.loop.cwd())
 end
 
-local function select_with_preview(opts)
-    require('oil').select({})
-end
-
 vim.keymap.set('n', '<leader>se', open_cwd, { desc = '[S]earch With File [E]xplorer' })
-
--- vim.api.nvim_create_autocmd('FileType', {
---     pattern = 'oil',
---     callback = function(args)
---         vim.keymap.set('n', 'o', select_with_preview, { buffer = args.buf })
---     end,
--- })

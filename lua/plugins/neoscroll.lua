@@ -10,5 +10,5 @@ require('neoscroll').setup({
         '<C-f>',
         'zz',
     },
-    duration_multipler = 0.5,
+    duration_multipler = 0.1,
 })

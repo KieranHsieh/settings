@@ -2,6 +2,9 @@ vim.pack.add({
     'https://github.com/nvim-mini/mini.nvim',
 })
 
+require('mini.surround').setup({})
+require('mini.pairs').setup({})
+
 require('mini.ai').setup({
     mappings = {
         around_next = 'aa',
@@ -9,8 +12,6 @@ require('mini.ai').setup({
     },
     n_lines = 500,
 })
-
-require('mini.surround').setup({})
 
 require('mini.statusline').setup({
     use_icons = true,

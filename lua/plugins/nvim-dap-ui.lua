@@ -43,33 +43,5 @@ require('dap').listeners.before.event_terminated['dapui_config'] = require('dapu
 require('dap').listeners.before.event_exited['dapui_config'] = require('dapui').close
 
 require('dap-lldb').setup()
-require('dap').configurations.cpp = {
-    {
-        name = 'Launch',
-        type = 'lldb',
-        request = 'launch',
-        program = function()
-            local co = coroutine.running()
-            require('fzf-lua').files({
-                hidden = true,
-                no_ignore = true,
-                actions = {
-                    ['default'] = function(selected)
-                        if selected and selected[1] then
-                            local file_entry = require('fzf-lua.path').entry_to_file(selected[1]).path
-                            coroutine.resume(co, file_entry)
-                        else
-                            coroutine.resume(co, nil)
-                        end
-                    end,
-                },
-            })
-            return coroutine.yield()
-        end,
-        cwd = '${workspaceFolder}',
-        stopOnEntry = false,
-        args = {},
-    },
-}
 
 vim.keymap.set('n', '<leader>bp', require('dap').toggle_breakpoint, { desc = 'Toggle [B]reak [P]oint' })

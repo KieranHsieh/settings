@@ -97,14 +97,6 @@ do
             vim.hl.on_yank()
         end,
     })
-
-    -- vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter', 'TermOpen' }, {
-    --     group = vim.api.nvim_create_augroup('kth-terminal-autoinsert', { clear = true }),
-    --     pattern = 'term://*',
-    --     callback = function()
-    --         vim.cmd('startinsert')
-    --     end,
-    -- })
 end
 
 -- ================================================================= --
@@ -168,6 +160,7 @@ do
     require('plugins.oil')
     require('plugins.overseer')
     require('plugins.which-key')
+    require('plugins.quicker')
 end
 
 -- ================================================================= --
@@ -178,7 +171,6 @@ end
 do
     --- Global
     vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Remove search highlights' })
-    vim.keymap.set('n', '<leader>qf', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
     vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left' })
     vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right' })
     vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the down' })
@@ -187,4 +179,7 @@ do
     vim.keymap.set('n', '<leader>to', '<cmd>botright 15split | terminal<CR>', { desc = '[T]erminal [O]pen' })
     vim.keymap.set('i', '<C-s>', '<cmd>w<CR>', { desc = '[S]ave the current buffer' })
     vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+    vim.keymap.set('n', '<leader>qfo', '<cmd>copen<CR>', { desc = '[Q]uick[f]ix List [O]pen' })
+    vim.keymap.set('n', '<leader>qfn', '<cmd>cnext<CR>', { desc = '[Q]uick[f]ix List [N]ext' })
+    vim.keymap.set('n', '<leader>qfp', '<cmd>cprev<CR>', { desc = '[Q]uick[f]ix List [P]revious' })
 end

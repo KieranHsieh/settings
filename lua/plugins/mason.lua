@@ -74,6 +74,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         add_keymap('n', 'grn', vim.lsp.buf.rename, '[R]e[n]ame Symbol')
         add_keymap({ 'n', 'x' }, 'gra', '[G]oto Code [A]ction')
         add_keymap('n', 'grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+        add_keymap('n', 'grh', vim.lsp.buf.hover, 'Show Symbol [H]over Information')
 
         -- Highlight references of the word under your cursor after it rests there for a bit
         local client = vim.lsp.get_client_by_id(event.data.client_id)

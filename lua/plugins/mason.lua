@@ -12,7 +12,7 @@ vim.pack.add({
 -- ================================================================= --
 local language_servers = {
     stylua = {},
-    ['rust-analyzer'] = {},
+    ['rust_analyzer'] = {},
     neocmake = {},
     ['jsonls'] = {},
     lua_ls = {

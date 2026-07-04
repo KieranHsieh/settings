@@ -97,6 +97,21 @@ do
             vim.hl.on_yank()
         end,
     })
+
+    vim.api.nvim_create_autocmd('PackChanged', {
+        callback = function(ev)
+            local name = ev.data.spec.name
+            local kind = ev.data.kind
+
+            if kind ~= 'install' and kind ~= 'update' then
+                return
+            end
+
+            if name == 'nvim-treesitter' then
+                vim.cmd('TSUpdate')
+            end
+        end,
+    })
 end
 
 -- ================================================================= --
@@ -124,7 +139,7 @@ do
             return
         end
 
-        local choice = vim.fn.confirm('Remove unused plugins?', '&Yes\n&No', 2)
+        local choice = vim.fn.confirm('Remove unused plugins?', '&Yes\n&No', 1)
 
         if choice == 1 then
             vim.pack.del(unused_plugins)
@@ -146,6 +161,7 @@ end
 -- ================================================================= --
 do
     require('themes.onedarkpro')
+    require('themes.catppuccin')
 
     require('plugins.blink')
     require('plugins.conform')
@@ -161,6 +177,8 @@ do
     require('plugins.overseer')
     require('plugins.which-key')
     require('plugins.quicker')
+    require('plugins.nvim-treesitter')
+    require('plugins.nvim-treesitter-textobjects')
 end
 
 -- ================================================================= --
@@ -182,4 +200,13 @@ do
     vim.keymap.set('n', '<leader>qfo', '<cmd>copen<CR>', { desc = '[Q]uick[f]ix List [O]pen' })
     vim.keymap.set('n', '<leader>qfn', '<cmd>cnext<CR>', { desc = '[Q]uick[f]ix List [N]ext' })
     vim.keymap.set('n', '<leader>qfp', '<cmd>cprev<CR>', { desc = '[Q]uick[f]ix List [P]revious' })
+end
+
+-- ================================================================= --
+--
+-- Theme Settings
+--
+-- ================================================================= --
+do
+    vim.cmd.colorscheme('onedark')
 end

@@ -21,4 +21,9 @@ local function open_cwd(opts)
     require('oil').open_float(vim.loop.cwd())
 end
 
-vim.keymap.set('n', '<leader>se', open_cwd, { desc = '[S]earch With File [E]xplorer' })
+local function open_current_buffer(opts)
+    require('oil').open_float()
+end
+
+vim.keymap.set('n', '<leader>ser', open_cwd, { desc = '[S]earch With File [E]xplorer In Project [R]oot' })
+vim.keymap.set('n', '<leader>se.', open_current_buffer, { desc = '[S]earch With File [E]xplorer In [C]urrent Dir' })

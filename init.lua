@@ -171,7 +171,6 @@ do
     require('plugins.mason')
     require('plugins.mini')
     require('plugins.neoscroll')
-    require('plugins.nvim-dap-ui')
     require('plugins.nvim-notify')
     require('plugins.oil')
     require('plugins.overseer')

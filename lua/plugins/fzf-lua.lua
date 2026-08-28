@@ -59,10 +59,10 @@ local function search_document_functions()
 end
 
 vim.keymap.set('n', '<leader>sf', fzf.files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>sq', fzf.quickfix, { desc = '[S]earch [Q]uickfix List' })
 vim.keymap.set('n', '<leader>sh', search_hidden_files, { desc = '[S]earch [H]idden Files' })
 vim.keymap.set('n', '<leader>sn', search_config_files, { desc = '[S]earch [N]eovim Config' })
-vim.keymap.set('n', '<leader>sdt', fzf.lgrep_curbuf, { desc = '[S]earch [D]ocument [T]ext' })
-vim.keymap.set('n', '<leader>/', fzf.lgrep_curbuf, { desc = '[S]earch [D]ocument [T]ext' })
+vim.keymap.set('n', '<leader>/', fzf.lgrep_curbuf, { desc = '[S]earch Document Text' })
 vim.keymap.set('n', '<leader>sif', fzf.live_grep_native, { desc = '[S]earch [I]n All [F]iles' })
 vim.keymap.set('n', '<leader>sgf', fzf.git_files, { desc = '[S]earch [G]it Files' })
 vim.keymap.set('n', '<leader>sgl', fzf.git_commits, { desc = '[S]earch [G]it [L]og' })
@@ -88,10 +88,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end
 
         add_keymap('n', 'grr', fzf.lsp_references, '[G]oto [R]eferences')
+        add_keymap('n', 'gra', fzf.lsp_code_actions, '[G]oto Code [A]ctions')
         add_keymap('n', 'gri', fzf.lsp_implementations, '[G]oto [I]mplementations')
         add_keymap('n', 'grd', fzf.lsp_definitions, '[G]oto [D]efinition')
+        add_keymap('n', 'grc', fzf.lsp_type_sub, '[G]oto [C]hildren')
+        add_keymap('n', 'grp', fzf.lsp_type_super, '[G]oto [P]arent')
+        add_keymap('n', 'grI', fzf.lsp_incoming_calls, '[G]oto [I]ncoming Calls')
+        add_keymap('n', 'grO', fzf.lsp_outgoing_calls, '[G]oto [O]utgoing Calls')
         add_keymap('n', '<leader>sds', fzf.lsp_document_symbols, '[S]earch [D]ocumnet [S]ymbols')
-        add_keymap('n', '<leader>sdf', search_document_functions, '[S]earch [D]ocumnet [F]unctions')
+        add_keymap('n', '<leader>sdd', fzf.lsp_document_diagnostics, '[S]earch [D]ocument [D]iagnostics')
         add_keymap('n', '<leader>sws', fzf.lsp_live_workspace_symbols, '[S]earch [W]orkspace [S]ymbols')
+        add_keymap('n', '<leader>swd', fzf.lsp_workspace_diagnostics, '[S]earch [W]orkspace [D]iagnostics')
     end,
 })

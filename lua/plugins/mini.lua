@@ -19,3 +19,5 @@ require('mini.statusline').setup({
         return '%2l:%-2v'
     end,
 })
+
+require('mini.input').setup({})
